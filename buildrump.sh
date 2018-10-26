@@ -1079,14 +1079,7 @@ evaltoolchain ()
 		THIRTYTWO=true
 	fi
 
-	# At least gcc on Ubuntu wants to set -D_FORTIFY_SOURCE=2
-	# when compiling with -O2 ...  While we have nothing against
-	# ssp, we don't want things to conflict with what the NetBSD
-	# build imagines is going on.  Therefore, force-disable that
-	# helpful default flag.
-	if cppdefines _FORTIFY_SOURCE -O2; then
-		appendvar EXTRA_CFLAGS -U_FORTIFY_SOURCE
-	fi
+	appendvar EXTRA_CFLAGS -D_FORTIFY_SOURCE=2
 
 	# The compiler cannot do %zd/u warnings if the NetBSD kernel
 	# uses the different flavor of size_t (int vs. long) than what
